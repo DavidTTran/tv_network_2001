@@ -16,6 +16,13 @@ class NetworkTest < Minitest::Test
     @parks_and_rec = Show.new("Parks and Recreation", "Michael Shur & Greg Daniels", [@leslie_knope, @ron_swanson])
   end
 
+  def test_it_exists
+    assert_instance_of Network, @nbc
+  end
 
+  def test_network_attributes
+    assert_equal "NBC", @nbc.name
+    assert_equal [], @nbc.shows
+  end
 
 end

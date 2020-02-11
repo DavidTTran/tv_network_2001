@@ -17,15 +17,26 @@ class Network
       show.characters.reject do |character|
         character.name.upcase == nil
         character.salary > 500000
-
       end
     end
   end
 
   def actors_by_show
-    @shows.reduce({}) do |hash, show|
-      hash.update(show => show.actors)
+    @shows.reduce({}) do |actor_by_show, show|
+      actor_by_show.update(show => show.actors)
     end
+  end
+
+  def shows_by_actor
+    require 'pry'; binding.pry
+    @shows.reduce({}) do |shows_by_actor, show|
+      if shows_by_actor.has_key?(show.actors)
+        shows_by_actor[show.actors] << show.name
+      else
+        shows_by_actor[show.actors] = [show.name]
+      end
+    end
+    shows_by_actor
   end
 
 
